@@ -52,14 +52,12 @@ class ItemController extends Controller
         $item->save();
 
         if ($request->image) {
-            $file_name = date('YmdHis') . uniqid() . '.jpg';
-            $file_path = 'img/items/';
+            $file_name = 'image/items/' . uniqid() . '.jpg';
 
-            $image = \Image::make($request->file('image')->getRealPath())->fit(1200, 630);
+            $image = \Image::make($request->file('image')->getRealPath())->fit(1200, 627);
+            Storage::disk('public')->put($file_name, (string) $image->encode('jpg', 80));
 
-            Storage::disk('public')->put($file_path . $file_name, (string) $image->encode('jpg', 80));
-
-            $item->image = $file_path . $file_name;
+            $item->image = $file_name;
             $item->save();
         }
 
@@ -117,14 +115,12 @@ class ItemController extends Controller
                 Storage::disk('public')->delete($item->image);
             }
 
-            $file_name = date('YmdHis') . uniqid() . '.jpg';
-            $file_path = 'img/items/';
+            $file_name = 'image/items/' . uniqid() . '.jpg';
 
-            $image = \Image::make($request->file('image')->getRealPath())->fit(1200, 630);
+            $image = \Image::make($request->file('image')->getRealPath())->fit(1200, 627);
+            Storage::disk('public')->put($file_name, (string) $image->encode('jpg', 80));
 
-            Storage::disk('public')->put($file_path . $file_name, (string) $image->encode('jpg', 80));
-
-            $item->image = $file_path . $file_name;
+            $item->image = $file_name;
             $item->update();
         }
 
