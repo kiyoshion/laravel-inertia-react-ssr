@@ -52,11 +52,12 @@ class ItemController extends Controller
         $item->save();
 
         if ($request->image) {
-            $file_name = 'image/items/' . uniqid() . '.jpg';
-
-            $image = \Image::make($request->file('image')->getRealPath())->fit(1200, 627);
+            $file_name = 'images/items/' . uniqid() . '.jpg';
+            $image = \Image::make($request->file('image')->getRealPath())
+                ->resize(1200, 630, function($constraint) {
+                    $constraint->aspectRatio();
+                });
             Storage::disk('public')->put($file_name, (string) $image->encode('jpg', 80));
-
             $item->image = $file_name;
             $item->save();
         }
@@ -110,16 +111,15 @@ class ItemController extends Controller
         );
 
         if ($request->image) {
-
             if ($item->image && Storage::disk('public')->exists($item->image)) {
                 Storage::disk('public')->delete($item->image);
             }
-
-            $file_name = 'image/items/' . uniqid() . '.jpg';
-
-            $image = \Image::make($request->file('image')->getRealPath())->fit(1200, 627);
+            $file_name = 'images/items/' . uniqid() . '.jpg';
+            $image = \Image::make($request->file('image')->getRealPath())
+                ->resize(1200, 630, function($constraint) {
+                    $constraint->aspectRatio();
+                });
             Storage::disk('public')->put($file_name, (string) $image->encode('jpg', 80));
-
             $item->image = $file_name;
             $item->update();
         }

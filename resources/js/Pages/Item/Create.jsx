@@ -42,7 +42,7 @@ export default function ItemCreate() {
     <Layout>
       <AppHead
         title='アイテム作成'
-        desc='アイテム作成のページです。'
+        desc='アイテム作成ページです。これはLaravel+React+InertiaでつくるSPAアプリのチュートリアルです。SPAをVPSでSSRしてみましょう。'
         image=''
       />
 

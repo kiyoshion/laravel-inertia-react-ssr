@@ -2,13 +2,13 @@ import AppHead from "@/Layouts/AppHead";
 import Layout from "@/Layouts/Layout";
 import { Link } from "@inertiajs/inertia-react";
 
-export default function ItemIndex({ items }) {
+export default function ItemIndex({ items, ziggy }) {
   return (
     <Layout>
       <AppHead
         title='アイテム一覧'
-        desc='アイテム一覧ページです。'
-        image={items[0] && items[0].image_fullpath}
+        desc='アイテム一覧ページです。これはLaravel+React+InertiaでつくるSPAアプリのチュートリアルです。SPAをVPSでSSRしてみましょう。'
+        image={`${ziggy.url}/images/default-item-image.jpg`}
       />
 
       <div>

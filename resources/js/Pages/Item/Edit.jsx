@@ -25,7 +25,7 @@ export default function ItemEdit({ item }) {
     <Layout>
       <AppHead
         title='アイテム編集'
-        desc='アイテム編集のページです。'
+        desc='アイテム編集ページです。これはLaravel+React+InertiaでつくるSPAアプリのチュートリアルです。SPAをVPSでSSRしてみましょう。'
         image=''
       />
 

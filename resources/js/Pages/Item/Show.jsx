@@ -12,7 +12,7 @@ export default function ItemShow({ item, auth }) {
     <Layout>
       <AppHead
         title={`${item.title}の詳細`}
-        desc={`${item.title}の詳細ページです。`}
+        desc={`${item.title}の詳細ページです。これはLaravel+React+InertiaでつくるSPAアプリのチュートリアルです。SPAをVPSでSSRしてみましょう。`}
         image={item.image_fullpath}
       />
 
