@@ -54,11 +54,19 @@ class ItemController extends Controller
         if ($request->image) {
             $file_name = 'images/items/' . uniqid() . '.jpg';
             $image = \Image::make($request->file('image')->getRealPath())
-                ->resize(1200, 630, function($constraint) {
+                ->resize(1200, 600, function($constraint) {
                     $constraint->aspectRatio();
                 });
             Storage::disk('public')->put($file_name, (string) $image->encode('jpg', 80));
             $item->image = $file_name;
+
+            $thumbnail = \Image::make($request->file('image')->getRealPath())->resize(null, 160, function($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $bin = base64_encode($thumbnail->encode('jpeg'));
+
+            $item->thumbnail = $bin;
             $item->save();
         }
 

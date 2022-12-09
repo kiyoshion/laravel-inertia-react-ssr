@@ -19,6 +19,7 @@ class Item extends Model
         'id',
         'title',
         'body',
+        'thumbnail',
         'image',
     ];
 

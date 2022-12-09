@@ -21,7 +21,7 @@ export default function ItemIndex({ items, ziggy }) {
             <div key={item.id} className='relative'>
               <Link href={`/items/${item.id}`} className='absolute top-0 left-0 w-full h-full' />
               <img
-                src={item.image_fullpath}
+                src={`data:image/jpeg;base64,${item.thumbnail}`}
                 alt={item.title}
               />
               <h2 className='font-bold'>{item.title}</h2>
