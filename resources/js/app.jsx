@@ -16,11 +16,7 @@ createInertiaApp({
     setup({ el, App, props }) {
         const root = createRoot(el);
 
-        root.render(
-            <Provider store={store}>
-                <App {...props} />
-            </Provider>
-        );
+        root.render(<App {...props} />);
     },
 });
 
