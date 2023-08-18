@@ -36,6 +36,10 @@ export default function Login({ status, canResetPassword }) {
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
+            <div className="text-center font-bold mb-4">
+                <h1 className="">Login</h1>
+            </div>
+
             <form onSubmit={submit}>
                 <div>
                     <InputLabel forInput="email" value="Email" />
@@ -86,6 +90,11 @@ export default function Login({ status, canResetPassword }) {
                             Forgot your password?
                         </Link>
                     )}
+
+                    <Link
+                        href="/register"
+                        className="ml-4 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >Wanna register?</Link>
 
                     <PrimaryButton className="ml-4" processing={processing}>
                         Log in
