@@ -19,6 +19,8 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 ENV LARAVEL_PATH=/srv/app
 WORKDIR $LARAVEL_PATH
 
+RUN cd /var/www && rm -rf html && ln -s /srv/app/public/ html
+
 # Add non-root user: 'app'
 ARG NON_ROOT_GROUP=${NON_ROOT_GROUP:-app}
 ARG NON_ROOT_USER=${NON_ROOT_USER:-app}
@@ -91,6 +93,8 @@ ARG VITE_PUSHER_HOST=${PUSHER_HOST}
 ARG VITE_PUSHER_PORT=${PUSHER_PORT}
 ARG VITE_PUSHER_SCHEME=${PUSHER_SCHEME}
 ARG VITE_PUSHER_APP_CLUSTER=${PUSHER_APP_CLUSTER}
+
+RUN cd $LARAVEL_PATH
 
 # Start app
 EXPOSE 80
