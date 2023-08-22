@@ -40,6 +40,7 @@ RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP /etc/crontabs/$NON_ROOT_USER && setc
 
 # Switch to non-root 'app' user & install app dependencies
 COPY composer.json composer.lock ./
+RUN touch .env && echo APP_KEY= >> .env
 RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP $LARAVEL_PATH
 USER $NON_ROOT_USER
 RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
@@ -48,10 +49,8 @@ RUN rm -rf /home/$NON_ROOT_USER/.composer
 # Copy app
 COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . $LARAVEL_PATH/
 COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
-COPY .env.example .env
 
 # Set any ENVs
-ARG APP_KEY=${APP_KEY}
 ARG APP_NAME=${APP_NAME}
 ARG APP_URL=${APP_URL}
 ARG APP_ENV=${APP_ENV}
