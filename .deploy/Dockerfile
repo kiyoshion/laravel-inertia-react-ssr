@@ -53,6 +53,7 @@ COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
 # Set any ENVs
 ARG APP_NAME=${APP_NAME}
 ARG APP_URL=${APP_URL}
+ARG ASSET_URL=${ASSET_URL}
 ARG APP_ENV=${APP_ENV}
 ARG APP_DEBUG=${APP_DEBUG}
 
