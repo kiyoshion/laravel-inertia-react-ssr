@@ -1,4 +1,4 @@
-ARG PHP_VERSION=${PHP_VERSION:-7.4}
+ARG PHP_VERSION=${PHP_VERSION:-8.2}
 FROM php:${PHP_VERSION}-fpm-alpine AS php-system-setup
 
 # Install system dependencies
@@ -12,11 +12,11 @@ RUN install-php-extensions intl bcmath gd pdo_mysql pdo_pgsql opcache redis uuid
 COPY --from=ochinchina/supervisord:latest /usr/local/bin/supervisord /usr/local/bin/supervisord
 
 # Install caddy
-COPY --from=caddy:2.2.1 /usr/bin/caddy /usr/local/bin/caddy
+COPY --from=caddy /usr/bin/caddy /usr/local/bin/caddy
 RUN setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 
 # Install composer
-COPY --from=composer/composer:2 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer/composer /usr/bin/composer /usr/local/bin/composer
 
 FROM php-system-setup AS app-setup
 
