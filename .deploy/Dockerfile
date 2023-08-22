@@ -15,6 +15,9 @@ COPY --from=ochinchina/supervisord:latest /usr/local/bin/supervisord /usr/local/
 COPY --from=caddy /usr/bin/caddy /usr/local/bin/caddy
 RUN setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
 
+# Install Node.js
+RUN apk update && apk --update add nodejs npm
+
 # Install composer
 COPY --from=composer/composer /usr/bin/composer /usr/local/bin/composer
 
