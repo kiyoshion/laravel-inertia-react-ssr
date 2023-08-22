@@ -10,9 +10,6 @@ npm run build
 echo "🎬 artisan commands"
 
 # 💡 Group into a custom command e.g. php artisan app:on-deploy
-touch .env
-echo APP_KEY= >> .env
-
 php artisan key:generate
 php artisan migrate --no-interaction --force
 

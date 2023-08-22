@@ -48,6 +48,7 @@ RUN rm -rf /home/$NON_ROOT_USER/.composer
 # Copy app
 COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . $LARAVEL_PATH/
 COPY ./.deploy/config/php/local.ini /usr/local/etc/php/conf.d/local.ini
+COPY .env.example .env
 
 # Set any ENVs
 ARG APP_KEY=${APP_KEY}
