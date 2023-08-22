@@ -28,7 +28,7 @@ RUN addgroup -S $NON_ROOT_GROUP && adduser -S $NON_ROOT_USER -G $NON_ROOT_GROUP 
 
 # Switch to non-root 'app' user & install app dependencies
 COPY composer.json composer.lock ./
-RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP $LARAVEL_PATH
+RUN chown -R $NON_ROOT_USER:$NON_ROOT_GROUP $LARAVEL_PATH && touch .env
 USER $NON_ROOT_USER
 RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader && rm -rf /home/$NON_ROOT_USER/.composer
 
@@ -37,7 +37,6 @@ COPY --chown=$NON_ROOT_USER:$NON_ROOT_GROUP . $LARAVEL_PATH/
 # Set any ENVs
 ARG APP_NAME=${APP_NAME:-Laravel}
 ARG APP_ENV=${APP_ENV:-local}
-ARG APP_KEY=${APP_KEY:-key}
 ARG APP_DEBUG=${APP_DEBUG:-true}
 ARG APP_URL=${APP_URL:-http://localhost}
 
